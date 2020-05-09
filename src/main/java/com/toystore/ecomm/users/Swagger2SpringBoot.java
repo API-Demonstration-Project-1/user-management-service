@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.ComponentScan;
-
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
@@ -16,9 +16,11 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 @RefreshScope
 @EnableCircuitBreaker
+@EnableResourceServer
 @ComponentScan(basePackages = { "com.toystore.ecomm.users", "com.toystore.ecomm.users.controllers" , 
-								"com.toystore.ecomm.users.configuration", "com.toystore.ecomm.users.exception",
-								"com.toystore.ecomm.users.model"})
+								"com.toystore.ecomm.users.config", "com.toystore.ecomm.users.exception",
+								"com.toystore.ecomm.users.model", "com.toystore.ecomm.users.repository",
+								"com.toystore.ecomm.users.services"})
 public class Swagger2SpringBoot implements CommandLineRunner {
 
     @Override
