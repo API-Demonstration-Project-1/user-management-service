@@ -10,16 +10,17 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Res
 
 @Configuration
 public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
-	
-	  @Override public void configure(HttpSecurity http) throws Exception { 
+
+	  @Override public void configure(HttpSecurity http) throws Exception {
 		  http
-		  .authorizeRequests() 
+		  //.ignoring().antMatchers("/api/users/swagger-ui.html")
+		  .authorizeRequests()
 		  .antMatchers(HttpMethod.GET, "/users/**")
 	      .hasRole("ADMIN")
-		  .anyRequest() .authenticated(); 
+		  .anyRequest() .authenticated();
 	  }
-	 
-    
+
+
 	/*
 	 * @Override public void configure(ResourceServerSecurityConfigurer resources) {
 	 * resources.resourceId("user-management-service").stateless(false); }

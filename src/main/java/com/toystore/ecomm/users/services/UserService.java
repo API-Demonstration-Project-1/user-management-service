@@ -35,11 +35,11 @@ public class UserService {
 		userRepository.save(user);
 	}
 
-	@HystrixCommand (fallbackMethod = "buildFallbackUserInfo")
+	//@HystrixCommand (fallbackMethod = "buildFallbackUserInfo")
 	public User getUser(Integer userId) {
-		randomlyRunLong();
+		//randomlyRunLong();
 		
-		return userRepository.findById(userId).get();
+		return userRepository.findByUserId(userId);
 	}
 
 	public List<User> getAllUsers() {
