@@ -6,5 +6,7 @@ spring:
       default
   cloud:
     config:
-      #uri: http://ec2-3-6-82-226.ap-south-1.compute.amazonaws.com:8888
       uri: https://localhost:8888
+logging:
+ level:
+  com.toystore.ecomm: DEBUG
