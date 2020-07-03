@@ -9,6 +9,7 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -34,6 +35,9 @@ import io.swagger.annotations.ApiParam;
 public class UsersApiController implements UsersApi {
 
     private static final Logger log = LoggerFactory.getLogger(UsersApiController.class);
+    
+    @Value("${signing.key}")
+	private String signKey;
 
     private final ObjectMapper objectMapper;
 
@@ -76,7 +80,7 @@ public class UsersApiController implements UsersApi {
         		String jwtToken = details.getTokenValue();
         		
         		Claims body = Jwts.parser()
-                        		  .setSigningKey("345345fsdfsf5345".getBytes())
+                        		  .setSigningKey(signKey.getBytes())
                         		  .parseClaimsJws(jwtToken)
                         		  .getBody();
         		System.out.println("DB URL is---------------------------------------------------:" + body.get("db_url"));
@@ -139,7 +143,7 @@ public class UsersApiController implements UsersApi {
             		String jwtToken = details.getTokenValue();
             		
             		Claims body = Jwts.parser()
-                            		  .setSigningKey("345345fsdfsf5345".getBytes())
+                            		  .setSigningKey(signKey.getBytes())
                             		  .parseClaimsJws(jwtToken)
                             		  .getBody();
             		System.out.println("DB URL is---------------------------------------------------:" + body.get("db_url"));
@@ -183,7 +187,7 @@ public class UsersApiController implements UsersApi {
 	        		String jwtToken = details.getTokenValue();
 	        		
 			        Claims jwtbody = Jwts.parser()
-			              		  .setSigningKey("345345fsdfsf5345".getBytes())
+			              		  .setSigningKey(signKey.getBytes())
 			              		  .parseClaimsJws(jwtToken)
 			              		  .getBody();
 					System.out.println("DB URL is---------------------------------------------------:" + jwtbody.get("db_url"));
@@ -209,22 +213,4 @@ public class UsersApiController implements UsersApi {
 
         return new ResponseEntity<Usersresponse>(HttpStatus.NOT_IMPLEMENTED);
     }
-    
-	/*
-	 * private void loadCurrentDatabaseInstance(String userName, LoggedTenantInfo
-	 * tenantInfo) { DBContextHolder.setCurrentDb(tenantInfo.getTenantDBName());
-	 * mapValue.put(userName, tenantInfo); }
-	 * 
-	 * @Bean(name = "userTenantInfo")
-	 * 
-	 * @ApplicationScope public UserTenantInformation setMetaDataAfterLogin() {
-	 * UserTenantInformation tenantInformation = new UserTenantInformation(); if
-	 * (mapValue.size() > 0) { for (String key : mapValue.keySet()) { if (null ==
-	 * userDbMap.get(key)) { //Here Assign putAll due to all time one come.
-	 * userDbMap.putAll(mapValue); } else { userDbMap.put(key, mapValue.get(key)); }
-	 * } mapValue = new HashMap<>(); } tenantInformation.setMap(userDbMap); return
-	 * tenantInformation; }
-	 */
-    
-
 }
