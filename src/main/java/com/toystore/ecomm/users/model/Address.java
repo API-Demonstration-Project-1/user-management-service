@@ -7,6 +7,8 @@ import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.*;
@@ -22,6 +24,7 @@ import javax.validation.constraints.*;
 public class Address   {
   @JsonProperty("addressId")
   @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "ADDRESS_ID", nullable = false)
   private Integer addressId = null;
 

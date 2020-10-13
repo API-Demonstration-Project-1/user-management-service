@@ -8,6 +8,8 @@ import javax.validation.constraints.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -22,6 +24,7 @@ import javax.persistence.Table;
 public class User   {
   @JsonProperty("userId")
   @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
   @Column(name = "USER_ID", nullable = false)
   private Integer userId = null;
 
